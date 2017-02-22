@@ -1,0 +1,17 @@
+{
+  "name": "ca-highway-conditions",
+  "version": "1.0.0",
+  "description": "Parser for http://www.dot.ca.gov/cgi-bin/roadlt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "california",
+    "highway",
+    "parser",
+    "dot"
+  ],
+  "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
+  "license": "MIT"
+}
