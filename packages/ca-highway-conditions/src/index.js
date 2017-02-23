@@ -2,6 +2,9 @@ import cmdline from 'commander';
 import Parse from 'ca-highway-conditions-parser';
 import fetch from 'isomorphic-fetch';
 import chalk from 'chalk';
+import { version, config } from '../package.json';
+
+const URL = process.env.npm_package_config_url || config.url;
 
 const Color = Object.freeze({
     highway: chalk.bold.underline,
@@ -25,7 +28,7 @@ const colorize = (conditions) => {
     });
 };
 
-const format = (conditions) => {
+const prettyFormat = (conditions) => {
     const notices = conditions.notices.reduce((state, notice) => [
         ...state,
         `${notice.title}${notice.messages.length ? '\n' : ''}${notice.messages.join('\n')}`
@@ -34,17 +37,25 @@ const format = (conditions) => {
     return `${conditions.highway}\n${notices.join('\n')}`;
 };
 
-const execute = (highways) => (
-    fetch('http://www.dot.ca.gov/cgi-bin/roadlt')
-        .then(response => response.text())
+const fetchData = (url) => fetch(url).then(response => {
+    return response.ok ? response.text() : Promise.reject(`Failed to fetch data: ${response.statusText}`);
+});
+
+const execute = (highways, options) => (
+    fetchData(URL)
         .then(Parse)
         .then(conditions => highways.reduce((state, highway) => [...state, conditions[highway] || empty(highway)].filter(Boolean), {}))
-        .then(conditions => conditions.map(colorize))
-        .then(conditions => conditions.map(format))
-        .then(conditions => console.log(conditions.join('\n\n')))
+        .then(conditions => options.noColors ? conditions : conditions.map(colorize))
+        .then(conditions => conditions.map(prettyFormat))
+        .then(
+            (conditions) => console.log(conditions.join('\n\n')),
+            (error) => console.error(error)
+        )
 );
 
 cmdline
+    .version(version)
     .arguments('<highway...>')
+    .option('-n, --no-colors', 'No colors in output')
     .action(execute)
     .parse(process.argv);

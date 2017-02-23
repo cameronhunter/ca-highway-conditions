@@ -1,5 +1,6 @@
 import babel from 'rollup-plugin-babel';
 import uglify from 'rollup-plugin-uglify';
+import json from 'rollup-plugin-json';
 
 const nonNull = (array) => array.filter(x => !!x);
 
@@ -14,6 +15,9 @@ export default {
   sourceMap: !isProduction,
   banner: '#!/usr/bin/env node',
   plugins: nonNull([
+    json({
+      include: './package.json'
+    }),
     babel({
       babelrc: false,
       presets: ['es2015-rollup']

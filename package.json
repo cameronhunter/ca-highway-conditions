@@ -1,14 +1,14 @@
 {
-  "name": "ca-highway-conditions",
-  "version": "0.0.0",
+  "private": true,
   "description": "Monorepo for California highway conditions",
-  "main": "index.js",
+  "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "scripts": {
     "lerna": "lerna --",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "lerna bootstrap --hoist",
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "publish": "lerna publish"
   },
-  "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
-  "license": "MIT",
   "devDependencies": {
     "lerna": "2.0.0-beta.37"
   }

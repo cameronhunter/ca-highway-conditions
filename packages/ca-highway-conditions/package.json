@@ -4,6 +4,9 @@
   "description": "Command line tool for California highway conditions",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "license": "MIT",
+  "config": {
+    "url": "http://www.dot.ca.gov/cgi-bin/roadlt"
+  },
   "bin": {
     "highway": "./build/index.min.js"
   },
@@ -27,6 +30,7 @@
     "babel-preset-es2015-rollup": "^3.0.0",
     "rollup": "^0.41.4",
     "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-json": "^2.1.0",
     "rollup-plugin-uglify": "^1.0.1"
   }
 }

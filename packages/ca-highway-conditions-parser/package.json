@@ -30,5 +30,7 @@
     "parser",
     "dot"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "tmp": "0.0.31"
+  }
 }
