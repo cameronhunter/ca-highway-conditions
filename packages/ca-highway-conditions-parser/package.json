@@ -1,6 +1,6 @@
 {
   "name": "ca-highway-conditions-parser",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Parser for http://www.dot.ca.gov/cgi-bin/roadlt",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "license": "MIT",
