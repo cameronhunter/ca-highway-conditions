@@ -1,3 +1,5 @@
 import Parser from './grammar.pegjs';
 
-export default Parser.parse;
+export default (input) => {
+    return Parser.parse(input && input.replace(/\r/g, ''));
+};

@@ -9,6 +9,7 @@
     "build"
   ],
   "scripts": {
+    "prebuild": "rm -rf build",
     "build": "NODE_ENV=production rollup -c",
     "pretest": "npm run build",
     "test": "ava",
@@ -17,9 +18,10 @@
   "devDependencies": {
     "ava": "^0.18.2",
     "babel-preset-es2015-rollup": "^3.0.0",
+    "isomorphic-fetch": "^2.2.1",
     "rollup": "^0.41.4",
     "rollup-plugin-babel": "^2.7.1",
-    "rollup-plugin-pegjs": "^2.1.1",
+    "rollup-plugin-pegjs": "^2.1.3",
     "rollup-plugin-uglify": "^1.0.1"
   },
   "keywords": [
@@ -27,5 +29,6 @@
     "highway",
     "parser",
     "dot"
-  ]
+  ],
+  "dependencies": {}
 }

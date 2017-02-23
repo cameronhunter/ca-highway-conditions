@@ -1,0 +1,31 @@
+{
+  "name": "ca-highway-conditions",
+  "version": "0.0.0",
+  "description": "Command line tool for California highway conditions",
+  "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
+  "license": "MIT",
+  "bin": {
+    "highway": "./build/index.min.js"
+  },
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "NODE_ENV=production rollup -c",
+    "postbuild": "chmod +x ./build/*.js",
+    "prestart": "npm run build",
+    "start": "./build/index.min.js"
+  },
+  "dependencies": {
+    "ca-highway-conditions-parser": "^1.0.0",
+    "commander": "^2.9.0",
+    "isomorphic-fetch": "^2.2.1"
+  },
+  "devDependencies": {
+    "ava": "^0.18.2",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "rollup": "^0.41.4",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-uglify": "^1.0.1"
+  }
+}

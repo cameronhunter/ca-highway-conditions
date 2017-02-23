@@ -1,5 +1,5 @@
 File "File"
-  = parts:(Notice / BlankLine)* _
+  = _ parts:(HTML / Notice / BlankLine)+ _
     { return parts.filter(Boolean).reduce((state, notice) => Object.assign({}, state, notice.highway && { [notice.highway]: notice }), {}) }
 
 Notice "Notice"
@@ -31,7 +31,7 @@ BlankLine "BlankLine"
     { return '\n'; }
 
 EOL "EOL"
-  = Space* [\n\r]
+  = Space* [\r]? [\n]
 
 Text "Text"
   = $(Character Space*)
@@ -39,6 +39,10 @@ Text "Text"
 Character "Character"
   = [A-Z0-9]
   / [./\\\-?(),&'";{}@#!$%^*=+:|><~`]
+
+HTML
+  = "<" [a-z]+ ">" _ { return null; }
+  / "<" "/" [a-z]+ ">" _ { return null; }
 
 Space "Space"
   = [ ]
