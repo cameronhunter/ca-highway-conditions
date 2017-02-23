@@ -3,7 +3,7 @@ File "File"
     { return parts.filter(Boolean).reduce((state, notice) => Object.assign({}, state, notice.highway && { [notice.highway]: notice }), {}) }
 
 Notice "Notice"
-  = highway:Highway notices:(title:Title messages:Message+ { return { title, messages } })+
+  = highway:Highway notices:(title:Title messages:Message+ { return { title, messages: messages.reduce((state, message) => state.concat(message), []) } })+
     { return Object.assign({}, highway, { notices }); }
 
 Highway "Highway"
@@ -15,8 +15,8 @@ Title "Title"
     { return title; }
 
 Message "Message"
-  = start:MessageStart rest:(lines:MessageLine* blankline:BlankLine { return lines.join('').trim() + '\n\n'; })*
-    { return [start, ...rest].join(' ').trim(); }
+  = start:MessageStart rest:(lines:MessageLine* BlankLine { return lines.concat('\n\n').join(' ') })*
+    { return [start, ...rest].join(' ').split('\n\n').map(s => s.trim()).filter(Boolean); }
 
 MessageStart "MessageStart"
   = Space+ message:$(MessageLine)

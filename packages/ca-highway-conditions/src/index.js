@@ -12,7 +12,7 @@ const Color = Object.freeze({
 const empty = (highway) => ({
     type: '',
     highway,
-    notices: [{ title: `No notices`, messages: [] }]
+    notices: [{ title: `No notices for ${highway}`, messages: [] }]
 });
 
 const colorize = (conditions) => {
