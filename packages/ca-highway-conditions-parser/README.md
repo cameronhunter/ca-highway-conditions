@@ -27,18 +27,18 @@ parser(input).then(
 
 ### Output
 ```json
-{
-    "20": {
-        "type": "SR",
-        "highway": "20",
-        "notices": [
-            {
-                "title": "IN THE NORTHERN CALIFORNIA AREA",
-                "messages": [
-                    "1-WAY CONTROLLED TRAFFIC FROM 5.5 MI EAST OF THE JCT OF SR 16 TO \"E\" ST /IN WILLIAMS/ (COLUSA CO) - DUE TO FLOODING"
-                ]
-            }
+[
+  {
+    "type": "SR",
+    "highway": "20",
+    "notices": [
+      {
+        "title": "IN THE NORTHERN CALIFORNIA AREA",
+        "messages": [
+          "1-WAY CONTROLLED TRAFFIC FROM 5.5 MI EAST OF THE JCT OF SR 16 TO \"E\" ST /IN WILLIAMS/ (COLUSA CO) - DUE TO FLOODING"
         ]
-    }
-}
+      }
+    ]
+  }
+]
 ```
