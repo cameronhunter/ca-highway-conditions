@@ -1,4 +1,5 @@
 # ca-highway-conditions-fetcher
+[![NPM Version](https://img.shields.io/npm/v/ca-highway-conditions-fetcher.svg)](https://npmjs.org/package/ca-highway-conditions-fetcher)
 
 ## Installation
 ```

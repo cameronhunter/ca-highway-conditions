@@ -1,4 +1,5 @@
 # ca-highway-conditions-parser
+[![NPM Version](https://img.shields.io/npm/v/ca-highway-conditions-parser.svg)](https://npmjs.org/package/ca-highway-conditions-parser)
 
 ## Installation
 ```
