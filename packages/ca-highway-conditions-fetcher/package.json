@@ -1,6 +1,6 @@
 {
   "name": "ca-highway-conditions-fetcher",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Fetch California highway conditions",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "license": "MIT",
