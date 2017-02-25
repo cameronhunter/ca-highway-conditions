@@ -38,7 +38,7 @@ const execute = (highways, options) => {
     new Listr(highways.map((number) => ({
         title: `Finding road conditions for highway ${number}`,
         task: (context, task) => {
-            return fetch([number]).then((result) => {
+            return fetch(number).then((result) => {
                 if (result[number].every(highway => highway.status === 404)) {
                     task.skip(`Couldn't find any data for highway ${number}`);
                 } else {

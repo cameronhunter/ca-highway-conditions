@@ -34,7 +34,7 @@ export const fetchHighway = (number, type) => {
     });
 };
 
-export default (highways) => {
+export default (...highways) => {
     const responses = highways.map(number => fetchHighway(number));
     return Promise.all(responses).then(flatten).then((results) => {
         return results.reduce((state, result) => ({

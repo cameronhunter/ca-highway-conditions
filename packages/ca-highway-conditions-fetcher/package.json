@@ -1,7 +1,7 @@
 {
   "name": "ca-highway-conditions-fetcher",
   "version": "1.0.0",
-  "description": "Fetch California highway conditions",
+  "description": "A library that fetches the highway conditions from http://www.dot.ca.gov/hq/roadinfo",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "license": "MIT",
   "main": "./build/index.js",

@@ -1,7 +1,7 @@
 {
   "name": "ca-highway-conditions-parser",
   "version": "3.0.0",
-  "description": "Parser for http://www.dot.ca.gov/cgi-bin/roadlt",
+  "description": "A library that parses the highway conditions format into JSON",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "license": "MIT",
   "main": "build/index.speed.js",
