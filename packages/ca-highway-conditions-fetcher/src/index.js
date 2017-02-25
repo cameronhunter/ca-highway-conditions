@@ -11,9 +11,9 @@ export const fetchHighway = (number, type) => {
     }
 
     const create = (response, body) => {
-        if (!response.ok) {
-            return [];
-        } else {
+        // if (!response.ok) {
+        //     return [];
+        // } else {
             return [{
                 ok: response.ok,
                 status: response.status,
@@ -24,7 +24,7 @@ export const fetchHighway = (number, type) => {
                     ...(body ? { body: body.replace(/[\r]/g, '') } : {})
                 }
             }];
-        }
+        // }
     };
 
     return fetch(`http://www.dot.ca.gov/hq/roadinfo/${type}${number}`.toLowerCase()).then((response) => {
@@ -39,7 +39,7 @@ export default (highways) => {
     return Promise.all(responses).then(flatten).then((results) => {
         return results.reduce((state, result) => ({
             ...state,
-            [result.payload.number]: [...(state[result.payload.number] || []), result.payload]
+            [result.payload.number]: [...(state[result.payload.number] || []), result]
         }), {});
     }).then((results) => {
         return highways.reduce((state, highway) => ({

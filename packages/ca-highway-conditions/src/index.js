@@ -3,6 +3,7 @@ import fetch from 'ca-highway-conditions-fetcher';
 import parse from 'ca-highway-conditions-parser';
 import chalk from 'chalk';
 import { version, config } from '../package.json';
+import Listr from 'listr';
 
 const flatten = (arr) => arr.reduce((state, items) => [...state, ...items], []);
 
@@ -34,15 +35,24 @@ const prettyFormat = (conditions) => {
 const identity = i => i;
 
 const execute = (highways, options) => {
-    fetch(highways).then((results) => {
-        return Promise.all(highways.map((number) => {
-            return Promise.all(results[number].map((highway) => {
-                return parse(highway.body).catch((e) => []);
-            }));
-        }));
-    }).then(flatten).then((results) => {
-        console.log(flatten(results).map(options.noColors ? identity : colorize).map(prettyFormat).join('\n\n'));
-    });
+    new Listr(highways.map((number) => ({
+        title: `Finding road conditions for highway ${number}`,
+        task: (context, task) => {
+            return fetch([number]).then((result) => {
+                if (result[number].every(highway => highway.status === 404)) {
+                    task.skip(`Couldn't find any data for highway ${number}`);
+                } else {
+                    return Promise.all((result[number] || []).map((highway) => {
+                        return parse(highway.payload.body).catch((e) => []);
+                    })).then(parsed => {
+                        task.title = flatten(parsed).map(options.noColors ? identity : colorize).map(prettyFormat).join('\n\n');
+                    });
+                }
+            });
+        }
+    })), {
+        concurrent: true
+    }).run();
 };
 
 cmdline
