@@ -22,7 +22,7 @@ test('Parses real fixture', t => {
 test('Chain control', t => {
     const data = fs.readFileSync(path.join(__dirname, 'fixture', 'data.txt'), 'utf-8');
     return parse(data).then(parsed => {
-        t.deepEqual(parsed[267], {
+        t.deepEqual(parsed.find(i => i.highway === '267'), {
             type: 'SR',
             highway: '267',
             notices: [

@@ -1,19 +1,17 @@
 import Parser from './grammar.pegjs';
-import tmp from 'tmp';
 
 export default (input, options) => {
-    const cleanInput = input && input.replace(/\r/g, '');
-    try {
-        return Promise.resolve(Parser.parse(cleanInput));
-    } catch (e) {
-        const { log = tmp.dirSync() } = options || {};
+    return new Promise((resolve, reject) => {
+        const cleanInput = input && input.replace(/\r/g, '');
 
-        const banner = new Array(80).fill('*').join('');
-        fs.appendFileSync(path.join(log.name, 'error.log'), JSON.stringify(e, null, 2));
-        fs.appendFileSync(path.join(log.name, 'input.txt'), [banner, input, banner, '\n'].join('\n'));
+        if (!cleanInput || !cleanInput.replace(/[\s]/g, '')) {
+            return reject('No data found');
+        }
 
-        console.error(`See "${log.name}" directory for further error details.`);
-
-        return Promise.reject(`Failed to parse input: ${e}`);
-    }
+        try {
+            return resolve(Parser.parse(cleanInput));
+        } catch (e) {
+            return reject('Failed to parse road conditions');
+        }
+    });
 };

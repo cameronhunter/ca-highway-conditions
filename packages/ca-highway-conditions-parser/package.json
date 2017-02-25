@@ -4,7 +4,7 @@
   "description": "Parser for http://www.dot.ca.gov/cgi-bin/roadlt",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "license": "MIT",
-  "main": "build/index.speed.min.js",
+  "main": "build/index.speed.js",
   "files": [
     "build"
   ],

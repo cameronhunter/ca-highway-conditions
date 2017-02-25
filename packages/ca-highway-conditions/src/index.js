@@ -1,21 +1,15 @@
 import cmdline from 'commander';
-import Parse from 'ca-highway-conditions-parser';
-import fetch from 'isomorphic-fetch';
+import fetch from 'ca-highway-conditions-fetcher';
+import parse from 'ca-highway-conditions-parser';
 import chalk from 'chalk';
 import { version, config } from '../package.json';
 
-const URL = process.env.npm_package_config_url || config.url;
+const flatten = (arr) => arr.reduce((state, items) => [...state, ...items], []);
 
 const Color = Object.freeze({
     highway: chalk.bold.underline,
     title: chalk.bold,
     text: chalk.dim
-});
-
-const empty = (highway) => ({
-    type: '',
-    highway,
-    notices: [{ title: `No notices for ${highway}`, messages: [] }]
 });
 
 const colorize = (conditions) => {
@@ -37,21 +31,19 @@ const prettyFormat = (conditions) => {
     return `${conditions.highway}\n${notices.join('\n')}`;
 };
 
-const fetchData = (url) => fetch(url).then(response => {
-    return response.ok ? response.text() : Promise.reject(`Failed to fetch data: ${response.statusText}`);
-});
+const identity = i => i;
 
-const execute = (highways, options) => (
-    fetchData(URL)
-        .then(Parse)
-        .then(conditions => highways.reduce((state, highway) => [...state, conditions[highway] || empty(highway)].filter(Boolean), {}))
-        .then(conditions => options.noColors ? conditions : conditions.map(colorize))
-        .then(conditions => conditions.map(prettyFormat))
-        .then(
-            (conditions) => console.log(conditions.join('\n\n')),
-            (error) => console.error(error)
-        )
-);
+const execute = (highways, options) => {
+    fetch(highways).then((results) => {
+        return Promise.all(highways.map((number) => {
+            return Promise.all(results[number].map((highway) => {
+                return parse(highway.body).catch((e) => []);
+            }));
+        }));
+    }).then(flatten).then((results) => {
+        console.log(flatten(results).map(options.noColors ? identity : colorize).map(prettyFormat).join('\n\n'));
+    });
+};
 
 cmdline
     .version(version)

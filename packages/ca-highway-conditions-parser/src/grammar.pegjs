@@ -1,6 +1,6 @@
 File "File"
   = _ parts:(HTML / Notice / BlankLine)+ _
-    { return parts.filter(Boolean).reduce((state, notice) => Object.assign({}, state, notice.highway && { [notice.highway]: notice }), {}) }
+    { return parts.filter(Boolean); }
 
 Notice "Notice"
   = highway:Highway notices:(title:Title messages:Message+ { return { title, messages: messages.reduce((state, message) => state.concat(message), []) } })+
@@ -41,8 +41,11 @@ Character "Character"
   / [./\\\-?(),&'";{}@#!$%^*=+:|><~`]
 
 HTML
-  = "<" [a-z]+ ">" _ { return null; }
+  = "<" [a-z]+ (Space+ Attribute)* ">" _ { return null; }
   / "<" "/" [a-z]+ ">" _ { return null; }
+
+Attribute
+  = [a-z]+ Space? "=" Space? "\"" [a-z]+ "\""
 
 Space "Space"
   = [ ]
