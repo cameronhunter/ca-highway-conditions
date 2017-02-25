@@ -1,6 +1,6 @@
 {
   "name": "ca-highway-conditions-fetcher",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A library that fetches the highway conditions from http://www.dot.ca.gov/hq/roadinfo",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "license": "MIT",

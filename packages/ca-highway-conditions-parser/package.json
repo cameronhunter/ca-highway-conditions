@@ -1,6 +1,6 @@
 {
   "name": "ca-highway-conditions-parser",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A library that parses the highway conditions format into JSON",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "license": "MIT",

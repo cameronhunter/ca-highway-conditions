@@ -1,6 +1,6 @@
 {
   "name": "ca-highway-conditions",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Command line tool for California highway conditions",
   "author": "Cameron Hunter <hello@cameronhunter.co.uk>",
   "license": "MIT",
@@ -20,8 +20,8 @@
     "start": "./build/index.min.js"
   },
   "dependencies": {
-    "ca-highway-conditions-fetcher": "^1.0.0",
-    "ca-highway-conditions-parser": "^3.0.0",
+    "ca-highway-conditions-fetcher": "^2.0.0",
+    "ca-highway-conditions-parser": "^3.0.1",
     "chalk": "^1.1.3",
     "commander": "^2.9.0",
     "listr": "^0.11.0"
